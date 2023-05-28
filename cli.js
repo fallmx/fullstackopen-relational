@@ -1,7 +1,7 @@
-require('dotenv').config()
+const config = require('./util/config')
 const { Sequelize, QueryTypes } = require('sequelize')
 
-const sequelize = new Sequelize(process.env.DATABASE_URL)
+const sequelize = new Sequelize(config.DATABASE_URL)
 
 const main = async () => {
   try {
