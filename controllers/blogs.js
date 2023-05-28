@@ -20,8 +20,12 @@ router.post('/', tokenExtractor, async (req, res) => {
   res.json(blog)
 })
 
-router.delete('/:id', blogFinder, async (req, res) => {
+router.delete('/:id', tokenExtractor, blogFinder, async (req, res) => {
   if (req.blog) {
+    if (req.blog.userId !== req.decodedToken.id){
+      return res.status(401).json({ error: 'not the owner' })
+    } 
+
     await req.blog.destroy()
     res.status(204).end()
   } else {
