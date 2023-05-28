@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +17,7 @@
     "sequelize": "^6.31.1"
   },
   "devDependencies": {
-    "@flydotio/dockerfile": "^0.2.7"
+    "@flydotio/dockerfile": "^0.2.7",
+    "nodemon": "^2.0.22"
   }
 }
