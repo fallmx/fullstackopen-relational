@@ -13,12 +13,8 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  try {
-    const blog = await Blog.create(req.body)
-    res.json(blog)
-  } catch (error) {
-    return res.status(400).json({ error })
-  }
+  const blog = await Blog.create(req.body)
+  res.json(blog)
 })
 
 router.delete('/:id', blogFinder, async (req, res) => {
@@ -34,15 +30,11 @@ router.put('/:id', blogFinder, async (req, res) => {
   if (req.blog) {
     const likes = req.body.likes
 
-    if (!likes) return res.status(400).end()
+    if (!likes) throw Error('missing field likes')
 
     req.blog.likes = likes
-    try {
-      await req.blog.save()
-      res.json({ likes })
-    } catch (error) {
-      return res.status(400).json({ error })
-    }
+    await req.blog.save()
+    res.json({ likes })
   } else {
     res.status(404).end()
   }
